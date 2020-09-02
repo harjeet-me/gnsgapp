@@ -1,0 +1,82 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="aSProgram">
+            <h2><span jhiTranslate="gnsgappApp.aSProgram.detail.title">AS Program</span> {{ aSProgram.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gnsgappApp.aSProgram.program">Program</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'gnsgappApp.PROGTYPE.' + aSProgram.program }}">{{ aSProgram.program }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.aSProgram.family">Family</span></dt>
+                <dd>
+                    <span>{{ aSProgram.family }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.aSProgram.phoneNumber">Phone Number</span></dt>
+                <dd>
+                    <span>{{ aSProgram.phoneNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.aSProgram.address">Address</span></dt>
+                <dd>
+                    <span>{{ aSProgram.address }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.aSProgram.startDate">Start Date</span></dt>
+                <dd>
+                    <span>{{ aSProgram.startDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.aSProgram.endDate">End Date</span></dt>
+                <dd>
+                    <span>{{ aSProgram.endDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.aSProgram.remark">Remark</span></dt>
+                <dd>
+                    <span>{{ aSProgram.remark }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.aSProgram.bookingDate">Booking Date</span></dt>
+                <dd>
+                    <span>{{ aSProgram.bookingDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.aSProgram.desc">Desc</span></dt>
+                <dd>
+                    <span>{{ aSProgram.desc }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.aSProgram.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'gnsgappApp.EventStatus.' + aSProgram.status }}">{{ aSProgram.status }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.aSProgram.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{ aSProgram.createdDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.aSProgram.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ aSProgram.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.aSProgram.lastModifiedDate">Last Modified Date</span></dt>
+                <dd>
+                    <span>{{ aSProgram.lastModifiedDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.aSProgram.lastModifiedBy">Last Modified By</span></dt>
+                <dd>
+                    <span>{{ aSProgram.lastModifiedBy }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/as-program', aSProgram.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

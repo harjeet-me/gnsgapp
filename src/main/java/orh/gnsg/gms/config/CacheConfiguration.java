@@ -49,6 +49,15 @@ public class CacheConfiguration {
             createCache(cm, orh.gnsg.gms.domain.User.class.getName() + ".authorities");
             createCache(cm, orh.gnsg.gms.domain.PersistentToken.class.getName());
             createCache(cm, orh.gnsg.gms.domain.User.class.getName() + ".persistentTokens");
+            createCache(cm, orh.gnsg.gms.domain.Program.class.getName());
+            createCache(cm, orh.gnsg.gms.domain.ASProgram.class.getName());
+            createCache(cm, orh.gnsg.gms.domain.ASProgram.class.getName() + ".pRouls");
+            createCache(cm, orh.gnsg.gms.domain.Expense.class.getName());
+            createCache(cm, orh.gnsg.gms.domain.Revenue.class.getName());
+            createCache(cm, orh.gnsg.gms.domain.Task.class.getName());
+            createCache(cm, orh.gnsg.gms.domain.Sevadar.class.getName());
+            createCache(cm, orh.gnsg.gms.domain.Sevadar.class.getName() + ".programs");
+            createCache(cm, orh.gnsg.gms.domain.PRoul.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

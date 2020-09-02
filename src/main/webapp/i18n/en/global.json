@@ -7,6 +7,13 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
+        "program": "Program",
+        "asProgram": "AS Program",
+        "expense": "Expense",
+        "revenue": "Revenue",
+        "task": "Task",
+        "sevadar": "Sevadar",
+        "pRoul": "P Roul",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
