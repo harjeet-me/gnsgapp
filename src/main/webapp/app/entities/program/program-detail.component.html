@@ -1,0 +1,112 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="program">
+            <h2><span jhiTranslate="gnsgappApp.program.detail.title">Program</span> {{ program.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gnsgappApp.program.programType">Program Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'gnsgappApp.EVENTTYPE.' + program.programType }}">{{ program.programType }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.location">Location</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'gnsgappApp.EVENTLOCATION.' + program.location }}">{{ program.location }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.etime">Etime</span></dt>
+                <dd>
+                    <span>{{ program.etime }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.family">Family</span></dt>
+                <dd>
+                    <span>{{ program.family }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.phoneNumber">Phone Number</span></dt>
+                <dd>
+                    <span>{{ program.phoneNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.address">Address</span></dt>
+                <dd>
+                    <span>{{ program.address }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.withLangar">With Langar</span></dt>
+                <dd>
+                    <span>{{ program.withLangar }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.langarMenu">Langar Menu</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'gnsgappApp.LANGARMENU.' + program.langarMenu }}">{{ program.langarMenu }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.langarTime">Langar Time</span></dt>
+                <dd>
+                    <span>{{ program.langarTime }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.dueAmt">Due Amt</span></dt>
+                <dd>
+                    <span>{{ program.dueAmt }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.paidAmt">Paid Amt</span></dt>
+                <dd>
+                    <span>{{ program.paidAmt }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.balAmt">Bal Amt</span></dt>
+                <dd>
+                    <span>{{ program.balAmt }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.recieptNumber">Reciept Number</span></dt>
+                <dd>
+                    <span>{{ program.recieptNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.remark">Remark</span></dt>
+                <dd>
+                    <span>{{ program.remark }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.bookingDate">Booking Date</span></dt>
+                <dd>
+                    <span>{{ program.bookingDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'gnsgappApp.EventStatus.' + program.status }}">{{ program.status }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{ program.createdDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ program.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.lastModifiedDate">Last Modified Date</span></dt>
+                <dd>
+                    <span>{{ program.lastModifiedDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.lastModifiedBy">Last Modified By</span></dt>
+                <dd>
+                    <span>{{ program.lastModifiedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsgappApp.program.sevadar">Sevadar</span></dt>
+                <dd>
+                    <div *ngIf="program.sevadar">
+                        <a [routerLink]="['/sevadar', program.sevadar?.id, 'view']">{{ program.sevadar?.name }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/program', program.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
