@@ -40,6 +40,12 @@
                 <dd>
                     <span>{{ expense.lastModifiedBy }}</span>
                 </dd>
+                <dt><span jhiTranslate="gnsgappApp.expense.vendor">Vendor</span></dt>
+                <dd>
+                    <div *ngIf="expense.vendor">
+                        <a [routerLink]="['/vendor', expense.vendor?.id, 'view']">{{ expense.vendor?.name }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

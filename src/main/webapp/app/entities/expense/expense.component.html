@@ -49,6 +49,7 @@
                     <th scope="col" ><span jhiTranslate="gnsgappApp.expense.createdBy">Created By</span></th>
                     <th scope="col" ><span jhiTranslate="gnsgappApp.expense.lastModifiedDate">Last Modified Date</span></th>
                     <th scope="col" ><span jhiTranslate="gnsgappApp.expense.lastModifiedBy">Last Modified By</span></th>
+                    <th scope="col" ><span jhiTranslate="gnsgappApp.expense.vendor">Vendor</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -63,6 +64,11 @@
                     <td>{{ expense.createdBy }}</td>
                     <td>{{ expense.lastModifiedDate | date:'medium' }}</td>
                     <td>{{ expense.lastModifiedBy }}</td>
+                    <td>
+                        <div *ngIf="expense.vendor">
+                            <a [routerLink]="['/vendor', expense.vendor?.id, 'view']" >{{ expense.vendor?.name }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

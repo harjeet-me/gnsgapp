@@ -9,6 +9,8 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IExpense, Expense } from 'app/shared/model/expense.model';
 import { ExpenseService } from './expense.service';
+import { IVendor } from 'app/shared/model/vendor.model';
+import { VendorService } from 'app/entities/vendor/vendor.service';
 
 @Component({
   selector: 'jhi-expense-update',
@@ -16,6 +18,7 @@ import { ExpenseService } from './expense.service';
 })
 export class ExpenseUpdateComponent implements OnInit {
   isSaving = false;
+  vendors: IVendor[] = [];
   dateDp: any;
 
   editForm = this.fb.group({
@@ -28,9 +31,15 @@ export class ExpenseUpdateComponent implements OnInit {
     createdBy: [],
     lastModifiedDate: [],
     lastModifiedBy: [],
+    vendor: [],
   });
 
-  constructor(protected expenseService: ExpenseService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected expenseService: ExpenseService,
+    protected vendorService: VendorService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ expense }) => {
@@ -41,6 +50,8 @@ export class ExpenseUpdateComponent implements OnInit {
       }
 
       this.updateForm(expense);
+
+      this.vendorService.query().subscribe((res: HttpResponse<IVendor[]>) => (this.vendors = res.body || []));
     });
   }
 
@@ -55,6 +66,7 @@ export class ExpenseUpdateComponent implements OnInit {
       createdBy: expense.createdBy,
       lastModifiedDate: expense.lastModifiedDate ? expense.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
       lastModifiedBy: expense.lastModifiedBy,
+      vendor: expense.vendor,
     });
   }
 
@@ -88,6 +100,7 @@ export class ExpenseUpdateComponent implements OnInit {
         ? moment(this.editForm.get(['lastModifiedDate'])!.value, DATE_TIME_FORMAT)
         : undefined,
       lastModifiedBy: this.editForm.get(['lastModifiedBy'])!.value,
+      vendor: this.editForm.get(['vendor'])!.value,
     };
   }
 
@@ -105,5 +118,9 @@ export class ExpenseUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  trackById(index: number, item: IVendor): any {
+    return item.id;
   }
 }

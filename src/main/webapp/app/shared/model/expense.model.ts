@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { IVendor } from 'app/shared/model/vendor.model';
 import { EXPTYPE } from 'app/shared/model/enumerations/exptype.model';
 
 export interface IExpense {
@@ -11,6 +12,7 @@ export interface IExpense {
   createdBy?: string;
   lastModifiedDate?: Moment;
   lastModifiedBy?: string;
+  vendor?: IVendor;
 }
 
 export class Expense implements IExpense {
@@ -23,6 +25,7 @@ export class Expense implements IExpense {
     public createdDate?: Moment,
     public createdBy?: string,
     public lastModifiedDate?: Moment,
-    public lastModifiedBy?: string
+    public lastModifiedBy?: string,
+    public vendor?: IVendor
   ) {}
 }
