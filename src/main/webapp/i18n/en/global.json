@@ -15,6 +15,10 @@
         "sevadar": "Sevadar",
         "pRoul": "P Roul",
         "vendor": "Vendor",
+        "dailyProgramReport": "Daily Program Report",
+        "pathReport": "Path Report",
+        "expenseReport": "Expense Report",
+        "revenueReport": "Revenue Report",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

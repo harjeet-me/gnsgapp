@@ -25,9 +25,33 @@ entity Program {
 
     
 }
+
+entity DailyProgramReport {
+    programType EVENTTYPE ,
+   	startDate LocalDate,
+    endDate LocalDate ,
+    report Blob,
+    createdDate Instant ,
+    createdBy String ,
+    lastModifiedDate Instant ,
+    lastModifiedBy String 
+}
+
 enum PROGTYPE{
   SEHAJ_PATH , AKHAND_PATH 
 }
+
+entity PathReport {
+    pathType PROGTYPE ,
+   	startDate LocalDate,
+    endDate LocalDate ,
+    report Blob,
+    createdDate Instant ,
+    createdBy String ,
+    lastModifiedDate Instant ,
+    lastModifiedBy String 
+}
+
 entity ASProgram {
     program PROGTYPE ,
 	family String,
@@ -53,6 +77,19 @@ INVOICE , RECIEPT , VOUCHER
 enum REVTYPE{
 PROGRAM , GOLAK , SEHAJ_PATH_BHETA
 }
+
+entity ExpenseReport {
+    expType  EXPTYPE ,
+	startDate LocalDate,
+    endDate LocalDate ,
+    report Blob,
+    createdDate Instant ,
+    createdBy String ,
+    lastModifiedDate Instant ,
+    lastModifiedBy String 
+}
+
+
 entity Expense {
     expType  EXPTYPE ,
 	amt Double ,
@@ -81,6 +118,19 @@ entity Revenue {
     lastModifiedDate Instant ,
     lastModifiedBy String 
 }
+
+entity RevenueReport {
+    revType  REVTYPE ,
+	startDate LocalDate,
+    endDate LocalDate ,
+    report Blob,
+    createdDate Instant ,
+    createdBy String ,
+    lastModifiedDate Instant ,
+    lastModifiedBy String 
+}
+
+
 enum EventStatus{
    BOOKED , COMPLETED , CANCELLED , REQUESTED , PAID
 }

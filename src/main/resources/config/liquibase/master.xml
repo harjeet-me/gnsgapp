@@ -22,6 +22,10 @@
     <include file="config/liquibase/changelog/20200902184729_added_entity_Sevadar.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200902184829_added_entity_PRoul.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200904203155_added_entity_Vendor.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200904213849_added_entity_DailyProgramReport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200904213949_added_entity_PathReport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200904214149_added_entity_ExpenseReport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200904214549_added_entity_RevenueReport.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20200902184229_added_entity_constraints_Program.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200902184829_added_entity_constraints_PRoul.xml" relativeToChangelogFile="false"/>

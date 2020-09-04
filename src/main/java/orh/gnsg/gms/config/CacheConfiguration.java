@@ -60,6 +60,10 @@ public class CacheConfiguration {
             createCache(cm, orh.gnsg.gms.domain.PRoul.class.getName());
             createCache(cm, orh.gnsg.gms.domain.Vendor.class.getName());
             createCache(cm, orh.gnsg.gms.domain.Vendor.class.getName() + ".expenses");
+            createCache(cm, orh.gnsg.gms.domain.DailyProgramReport.class.getName());
+            createCache(cm, orh.gnsg.gms.domain.PathReport.class.getName());
+            createCache(cm, orh.gnsg.gms.domain.ExpenseReport.class.getName());
+            createCache(cm, orh.gnsg.gms.domain.RevenueReport.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
