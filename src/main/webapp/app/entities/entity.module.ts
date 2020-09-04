@@ -36,6 +36,23 @@ import { RouterModule } from '@angular/router';
         path: 'vendor',
         loadChildren: () => import('./vendor/vendor.module').then(m => m.GnsgappVendorModule),
       },
+      ,
+      {
+        path: 'daily-program-report',
+        loadChildren: () => import('./daily-program-report/daily-program-report.module').then(m => m.GnsgappDailyProgramReportModule),
+      },
+      {
+        path: 'path-report',
+        loadChildren: () => import('./path-report/path-report.module').then(m => m.GnsgappPathReportModule),
+      },
+      {
+        path: 'expense-report',
+        loadChildren: () => import('./expense-report/expense-report.module').then(m => m.GnsgappExpenseReportModule),
+      },
+      {
+        path: 'revenue-report',
+        loadChildren: () => import('./revenue-report/revenue-report.module').then(m => m.GnsgappRevenueReportModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],
