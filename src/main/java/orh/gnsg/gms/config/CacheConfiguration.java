@@ -58,6 +58,8 @@ public class CacheConfiguration {
             createCache(cm, orh.gnsg.gms.domain.Sevadar.class.getName());
             createCache(cm, orh.gnsg.gms.domain.Sevadar.class.getName() + ".programs");
             createCache(cm, orh.gnsg.gms.domain.PRoul.class.getName());
+            createCache(cm, orh.gnsg.gms.domain.Vendor.class.getName());
+            createCache(cm, orh.gnsg.gms.domain.Vendor.class.getName() + ".expenses");
             // jhipster-needle-ehcache-add-entry
         };
     }

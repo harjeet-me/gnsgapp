@@ -14,6 +14,7 @@
         "task": "Task",
         "sevadar": "Sevadar",
         "pRoul": "P Roul",
+        "vendor": "Vendor",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

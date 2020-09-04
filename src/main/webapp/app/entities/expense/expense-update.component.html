@@ -67,6 +67,14 @@
                     <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
                            formControlName="lastModifiedBy"/>
                 </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gnsgappApp.expense.vendor" for="field_vendor">Vendor</label>
+                    <select class="form-control" id="field_vendor" name="vendor" formControlName="vendor">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="vendorOption.id === editForm.get('vendor')!.value?.id ? editForm.get('vendor')!.value : vendorOption" *ngFor="let vendorOption of vendors; trackBy: trackById">{{ vendorOption.name }}</option>
+                    </select>
+                </div>
             </div>
 
             <div>

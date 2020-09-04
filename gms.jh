@@ -63,6 +63,14 @@ entity Expense {
     lastModifiedDate Instant ,
     lastModifiedBy String 
 }
+
+entity Vendor {
+    name  String ,
+	createdDate Instant ,
+    createdBy String ,
+    lastModifiedDate Instant ,
+    lastModifiedBy String 
+}
 entity Revenue {
     revType  REVTYPE ,
 	amt Double ,
@@ -155,7 +163,7 @@ enum EVENTTYPE {
 // defining multiple OneToMany relationships with comments
  relationship OneToMany {
    //Sevadar  to   Program {sevadar(name)}
-   
+    Vendor  to   Expense {vendor(name)}
     Sevadar  to   Program {sevadar(name)}
     ASProgram to  PRoul {prog(desc)} 
       //Sevadar  to   SehajPath {granthi(name)}

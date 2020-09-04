@@ -32,6 +32,11 @@ import { RouterModule } from '@angular/router';
         path: 'p-roul',
         loadChildren: () => import('./p-roul/p-roul.module').then(m => m.GnsgappPRoulModule),
       },
+      ,
+      {
+        path: 'vendor',
+        loadChildren: () => import('./vendor/vendor.module').then(m => m.GnsgappVendorModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

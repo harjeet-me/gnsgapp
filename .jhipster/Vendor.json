@@ -1,21 +1,8 @@
 {
-  "name": "Expense",
+  "name": "Vendor",
   "fields": [
     {
-      "fieldName": "expType",
-      "fieldType": "EXPTYPE",
-      "fieldValues": "INVOICE,RECIEPT,VOUCHER"
-    },
-    {
-      "fieldName": "amt",
-      "fieldType": "Double"
-    },
-    {
-      "fieldName": "date",
-      "fieldType": "LocalDate"
-    },
-    {
-      "fieldName": "desc",
+      "fieldName": "name",
       "fieldType": "String"
     },
     {
@@ -37,15 +24,14 @@
   ],
   "relationships": [
     {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "vendor",
-      "otherEntityRelationshipName": "expense",
-      "relationshipName": "vendor",
-      "otherEntityField": "name"
+      "relationshipType": "one-to-many",
+      "otherEntityName": "expense",
+      "otherEntityRelationshipName": "vendor",
+      "relationshipName": "expense"
     }
   ],
-  "changelogDate": "20200902184429",
-  "entityTableName": "expense",
+  "changelogDate": "20200904203155",
+  "entityTableName": "vendor",
   "dto": "no",
   "pagination": "no",
   "service": "serviceImpl",

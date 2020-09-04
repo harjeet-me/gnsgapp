@@ -1,6 +1,5 @@
 package orh.gnsg.gms.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -9,18 +8,17 @@ import javax.persistence.*;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.time.Instant;
-import java.time.LocalDate;
-
-import orh.gnsg.gms.domain.enumeration.EXPTYPE;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
- * A Expense.
+ * A Vendor.
  */
 @Entity
-@Table(name = "expense")
+@Table(name = "vendor")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "expense")
-public class Expense implements Serializable {
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "vendor")
+public class Vendor implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -28,18 +26,8 @@ public class Expense implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "exp_type")
-    private EXPTYPE expType;
-
-    @Column(name = "amt")
-    private Double amt;
-
-    @Column(name = "date")
-    private LocalDate date;
-
-    @Column(name = "jhi_desc")
-    private String desc;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "created_date")
     private Instant createdDate;
@@ -53,9 +41,9 @@ public class Expense implements Serializable {
     @Column(name = "last_modified_by")
     private String lastModifiedBy;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = "expenses", allowSetters = true)
-    private Vendor vendor;
+    @OneToMany(mappedBy = "vendor")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<Expense> expenses = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -66,63 +54,24 @@ public class Expense implements Serializable {
         this.id = id;
     }
 
-    public EXPTYPE getExpType() {
-        return expType;
+    public String getName() {
+        return name;
     }
 
-    public Expense expType(EXPTYPE expType) {
-        this.expType = expType;
+    public Vendor name(String name) {
+        this.name = name;
         return this;
     }
 
-    public void setExpType(EXPTYPE expType) {
-        this.expType = expType;
-    }
-
-    public Double getAmt() {
-        return amt;
-    }
-
-    public Expense amt(Double amt) {
-        this.amt = amt;
-        return this;
-    }
-
-    public void setAmt(Double amt) {
-        this.amt = amt;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public Expense date(LocalDate date) {
-        this.date = date;
-        return this;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public Expense desc(String desc) {
-        this.desc = desc;
-        return this;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Instant getCreatedDate() {
         return createdDate;
     }
 
-    public Expense createdDate(Instant createdDate) {
+    public Vendor createdDate(Instant createdDate) {
         this.createdDate = createdDate;
         return this;
     }
@@ -135,7 +84,7 @@ public class Expense implements Serializable {
         return createdBy;
     }
 
-    public Expense createdBy(String createdBy) {
+    public Vendor createdBy(String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -148,7 +97,7 @@ public class Expense implements Serializable {
         return lastModifiedDate;
     }
 
-    public Expense lastModifiedDate(Instant lastModifiedDate) {
+    public Vendor lastModifiedDate(Instant lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
         return this;
     }
@@ -161,7 +110,7 @@ public class Expense implements Serializable {
         return lastModifiedBy;
     }
 
-    public Expense lastModifiedBy(String lastModifiedBy) {
+    public Vendor lastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
         return this;
     }
@@ -170,17 +119,29 @@ public class Expense implements Serializable {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public Vendor getVendor() {
-        return vendor;
+    public Set<Expense> getExpenses() {
+        return expenses;
     }
 
-    public Expense vendor(Vendor vendor) {
-        this.vendor = vendor;
+    public Vendor expenses(Set<Expense> expenses) {
+        this.expenses = expenses;
         return this;
     }
 
-    public void setVendor(Vendor vendor) {
-        this.vendor = vendor;
+    public Vendor addExpense(Expense expense) {
+        this.expenses.add(expense);
+        expense.setVendor(this);
+        return this;
+    }
+
+    public Vendor removeExpense(Expense expense) {
+        this.expenses.remove(expense);
+        expense.setVendor(null);
+        return this;
+    }
+
+    public void setExpenses(Set<Expense> expenses) {
+        this.expenses = expenses;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -189,10 +150,10 @@ public class Expense implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Expense)) {
+        if (!(o instanceof Vendor)) {
             return false;
         }
-        return id != null && id.equals(((Expense) o).id);
+        return id != null && id.equals(((Vendor) o).id);
     }
 
     @Override
@@ -203,12 +164,9 @@ public class Expense implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "Expense{" +
+        return "Vendor{" +
             "id=" + getId() +
-            ", expType='" + getExpType() + "'" +
-            ", amt=" + getAmt() +
-            ", date='" + getDate() + "'" +
-            ", desc='" + getDesc() + "'" +
+            ", name='" + getName() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", lastModifiedDate='" + getLastModifiedDate() + "'" +
