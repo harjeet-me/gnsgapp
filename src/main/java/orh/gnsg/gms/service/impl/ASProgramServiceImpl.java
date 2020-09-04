@@ -43,6 +43,10 @@ public class ASProgramServiceImpl implements ASProgramService {
     @Override
     public ASProgram save(ASProgram aSProgram) {
         log.debug("Request to save ASProgram : {}", aSProgram);
+        
+         
+        aSProgram.setDesc(""+ aSProgram.getProgram()+"_"+aSProgram.getFamily()+"_"+aSProgram.getStartDate());
+        
         ASProgram result = aSProgramRepository.save(aSProgram);
         aSProgramSearchRepository.save(result);
         return result;

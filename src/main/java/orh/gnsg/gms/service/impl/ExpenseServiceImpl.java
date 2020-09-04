@@ -57,8 +57,11 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     @Transactional(readOnly = true)
     public List<Expense> findAll() {
+    	
         log.debug("Request to get all Expenses");
-        return expenseRepository.findAll();
+                return expenseRepository.findAll();
+        
+       
     }
 
 
