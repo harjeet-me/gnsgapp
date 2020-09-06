@@ -32,12 +32,10 @@ import { RouterModule } from '@angular/router';
         path: 'p-roul',
         loadChildren: () => import('./p-roul/p-roul.module').then(m => m.GnsgappPRoulModule),
       },
-      ,
       {
         path: 'vendor',
         loadChildren: () => import('./vendor/vendor.module').then(m => m.GnsgappVendorModule),
       },
-      ,
       {
         path: 'daily-program-report',
         loadChildren: () => import('./daily-program-report/daily-program-report.module').then(m => m.GnsgappDailyProgramReportModule),

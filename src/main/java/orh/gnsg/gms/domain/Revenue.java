@@ -1,15 +1,13 @@
 package orh.gnsg.gms.domain;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
-import org.springframework.data.elasticsearch.annotations.FieldType;
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
-
+import javax.persistence.*;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import orh.gnsg.gms.domain.enumeration.REVTYPE;
 
 /**
@@ -20,23 +18,27 @@ import orh.gnsg.gms.domain.enumeration.REVTYPE;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "revenue")
 public class Revenue implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
+    @Expose
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Expose
     @Enumerated(EnumType.STRING)
     @Column(name = "rev_type")
     private REVTYPE revType;
 
+    @Expose
     @Column(name = "amt")
     private Double amt;
 
+    @Expose
     @Column(name = "date")
     private LocalDate date;
 
+    @Expose
     @Column(name = "jhi_desc")
     private String desc;
 
@@ -164,6 +166,7 @@ public class Revenue implements Serializable {
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
     }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
