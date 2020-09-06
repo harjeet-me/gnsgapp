@@ -9,7 +9,6 @@ import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.Instant;
 
 import orh.gnsg.gms.domain.enumeration.EVENTTYPE;
@@ -66,14 +65,14 @@ public class Program implements Serializable {
     @Column(name = "langar_time")
     private Instant langarTime;
 
-    @Column(name = "due_amt", precision = 21, scale = 2)
-    private BigDecimal dueAmt;
+    @Column(name = "due_amt")
+    private Double dueAmt;
 
-    @Column(name = "paid_amt", precision = 21, scale = 2)
-    private BigDecimal paidAmt;
+    @Column(name = "paid_amt")
+    private Double paidAmt;
 
-    @Column(name = "bal_amt", precision = 21, scale = 2)
-    private BigDecimal balAmt;
+    @Column(name = "bal_amt")
+    private Double balAmt;
 
     @Column(name = "reciept_number")
     private Long recieptNumber;
@@ -230,42 +229,42 @@ public class Program implements Serializable {
         this.langarTime = langarTime;
     }
 
-    public BigDecimal getDueAmt() {
+    public Double getDueAmt() {
         return dueAmt;
     }
 
-    public Program dueAmt(BigDecimal dueAmt) {
+    public Program dueAmt(Double dueAmt) {
         this.dueAmt = dueAmt;
         return this;
     }
 
-    public void setDueAmt(BigDecimal dueAmt) {
+    public void setDueAmt(Double dueAmt) {
         this.dueAmt = dueAmt;
     }
 
-    public BigDecimal getPaidAmt() {
+    public Double getPaidAmt() {
         return paidAmt;
     }
 
-    public Program paidAmt(BigDecimal paidAmt) {
+    public Program paidAmt(Double paidAmt) {
         this.paidAmt = paidAmt;
         return this;
     }
 
-    public void setPaidAmt(BigDecimal paidAmt) {
+    public void setPaidAmt(Double paidAmt) {
         this.paidAmt = paidAmt;
     }
 
-    public BigDecimal getBalAmt() {
+    public Double getBalAmt() {
         return balAmt;
     }
 
-    public Program balAmt(BigDecimal balAmt) {
+    public Program balAmt(Double balAmt) {
         this.balAmt = balAmt;
         return this;
     }
 
-    public void setBalAmt(BigDecimal balAmt) {
+    public void setBalAmt(Double balAmt) {
         this.balAmt = balAmt;
     }
 

@@ -43,13 +43,13 @@
             <column name="langar_time" type="datetime">
                 <constraints nullable="true" />
             </column>
-            <column name="due_amt" type="decimal(21,2)">
+            <column name="due_amt" type="double">
                 <constraints nullable="true" />
             </column>
-            <column name="paid_amt" type="decimal(21,2)">
+            <column name="paid_amt" type="double">
                 <constraints nullable="true" />
             </column>
-            <column name="bal_amt" type="decimal(21,2)">
+            <column name="bal_amt" type="double">
                 <constraints nullable="true" />
             </column>
             <column name="reciept_number" type="bigint">
