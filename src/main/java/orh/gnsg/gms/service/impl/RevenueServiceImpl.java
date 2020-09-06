@@ -1,23 +1,21 @@
 package orh.gnsg.gms.service.impl;
 
-import orh.gnsg.gms.service.RevenueService;
-import orh.gnsg.gms.domain.Revenue;
-import orh.gnsg.gms.domain.enumeration.REVTYPE;
-import orh.gnsg.gms.repository.RevenueRepository;
-import orh.gnsg.gms.repository.search.RevenueSearchRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import orh.gnsg.gms.domain.Revenue;
+import orh.gnsg.gms.domain.enumeration.REVTYPE;
+import orh.gnsg.gms.repository.RevenueRepository;
+import orh.gnsg.gms.repository.search.RevenueSearchRepository;
+import orh.gnsg.gms.service.RevenueService;
 
 /**
  * Service Implementation for managing {@link Revenue}.
@@ -25,7 +23,6 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 @Service
 @Transactional
 public class RevenueServiceImpl implements RevenueService {
-
     private final Logger log = LoggerFactory.getLogger(RevenueServiceImpl.class);
 
     private final RevenueRepository revenueRepository;
@@ -46,6 +43,10 @@ public class RevenueServiceImpl implements RevenueService {
     @Override
     public Revenue save(Revenue revenue) {
         log.debug("Request to save Revenue : {}", revenue);
+
+        if (revenue.getDesc() == null || revenue.getDesc().isEmpty()) {
+            revenue.setDesc("NA");
+        }
         Revenue result = revenueRepository.save(revenue);
         revenueSearchRepository.save(result);
         return result;
@@ -60,10 +61,8 @@ public class RevenueServiceImpl implements RevenueService {
     @Transactional(readOnly = true)
     public List<Revenue> findAll() {
         log.debug("Request to get all Revenues");
-        CsvHelper.ListJson(revenueRepository.findByRevTypeAndDateBetween(REVTYPE.SEHAJ_PATH_BHETA ,LocalDate.of(2012, 2, 22),LocalDate.now())); 
         return revenueRepository.findAll();
     }
-
 
     /**
      * Get one revenue by id.
@@ -103,6 +102,6 @@ public class RevenueServiceImpl implements RevenueService {
         log.debug("Request to search Revenues for query {}", query);
         return StreamSupport
             .stream(revenueSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-        .collect(Collectors.toList());
+            .collect(Collectors.toList());
     }
 }

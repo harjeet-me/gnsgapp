@@ -1,21 +1,27 @@
 package orh.gnsg.gms.service.impl;
 
-import orh.gnsg.gms.service.RevenueReportService;
-import orh.gnsg.gms.domain.RevenueReport;
-import orh.gnsg.gms.repository.RevenueReportRepository;
-import orh.gnsg.gms.repository.search.RevenueReportSearchRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.log.SysoCounter;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import orh.gnsg.gms.domain.Revenue;
+import orh.gnsg.gms.domain.RevenueReport;
+import orh.gnsg.gms.domain.enumeration.REVTYPE;
+import orh.gnsg.gms.repository.RevenueReportRepository;
+import orh.gnsg.gms.repository.RevenueRepository;
+import orh.gnsg.gms.repository.search.RevenueReportSearchRepository;
+import orh.gnsg.gms.service.RevenueReportService;
 
 /**
  * Service Implementation for managing {@link RevenueReport}.
@@ -23,14 +29,19 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 @Service
 @Transactional
 public class RevenueReportServiceImpl implements RevenueReportService {
-
     private final Logger log = LoggerFactory.getLogger(RevenueReportServiceImpl.class);
 
     private final RevenueReportRepository revenueReportRepository;
 
+    @Autowired
+    RevenueRepository revenueRepository;
+
     private final RevenueReportSearchRepository revenueReportSearchRepository;
 
-    public RevenueReportServiceImpl(RevenueReportRepository revenueReportRepository, RevenueReportSearchRepository revenueReportSearchRepository) {
+    public RevenueReportServiceImpl(
+        RevenueReportRepository revenueReportRepository,
+        RevenueReportSearchRepository revenueReportSearchRepository
+    ) {
         this.revenueReportRepository = revenueReportRepository;
         this.revenueReportSearchRepository = revenueReportSearchRepository;
     }
@@ -44,6 +55,42 @@ public class RevenueReportServiceImpl implements RevenueReportService {
     @Override
     public RevenueReport save(RevenueReport revenueReport) {
         log.debug("Request to save RevenueReport : {}", revenueReport);
+        List<Revenue> objectList = null;
+        if (revenueReport.getRevType() != null && revenueReport.getRevType() == (REVTYPE.ALL)) {
+            objectList = revenueRepository.findByDateBetween(revenueReport.getStartDate(), revenueReport.getEndDate());
+        } else {
+            objectList =
+                revenueRepository.findByRevTypeAndDateBetween(
+                    revenueReport.getRevType(),
+                    revenueReport.getStartDate(),
+                    revenueReport.getEndDate()
+                );
+        }
+
+        System.out.println("Arraylist data from database >>>>>>>>>>>>>>>>>>>>>>>>>  : \n" + objectList);
+
+        String json = CsvHelper.ListJson(objectList);
+
+        String json1 = CsvHelper.ListAsJson(objectList);
+
+        System.out.println("Json from  old api  ???????????????????????????: " + json);
+        System.out.println("Json from  new  api  ???????????????????????????: " + json1);
+        try {
+            revenueReport.setReport(
+                CsvToPdfConverter.csvToPdfConverter(
+                    json.getBytes(),
+                    new ReportObj("Revenue ", revenueReport.getStartDate(), revenueReport.getEndDate(), 6576575.9)
+                )
+            );
+            revenueReport.setReportContentType("application/pdf");
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (DocumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
         RevenueReport result = revenueReportRepository.save(revenueReport);
         revenueReportSearchRepository.save(result);
         return result;
@@ -60,7 +107,6 @@ public class RevenueReportServiceImpl implements RevenueReportService {
         log.debug("Request to get all RevenueReports");
         return revenueReportRepository.findAll();
     }
-
 
     /**
      * Get one revenueReport by id.
@@ -100,6 +146,6 @@ public class RevenueReportServiceImpl implements RevenueReportService {
         log.debug("Request to search RevenueReports for query {}", query);
         return StreamSupport
             .stream(revenueReportSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-        .collect(Collectors.toList());
+            .collect(Collectors.toList());
     }
 }

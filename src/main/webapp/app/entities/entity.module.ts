@@ -36,7 +36,6 @@ import { RouterModule } from '@angular/router';
         path: 'vendor',
         loadChildren: () => import('./vendor/vendor.module').then(m => m.GnsgappVendorModule),
       },
-      ,
       {
         path: 'daily-program-report',
         loadChildren: () => import('./daily-program-report/daily-program-report.module').then(m => m.GnsgappDailyProgramReportModule),
