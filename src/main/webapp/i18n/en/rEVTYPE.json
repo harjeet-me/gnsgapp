@@ -1,7 +1,6 @@
 {
   "gnsgappApp": {
     "REVTYPE": {
-      "ALL": "ALL",
       "null": "",
       "PROGRAM": "PROGRAM",
       "GOLAK": "GOLAK",
