@@ -21,7 +21,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
@@ -75,14 +74,14 @@ public class ProgramResourceIT {
     private static final Instant DEFAULT_LANGAR_TIME = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_LANGAR_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final BigDecimal DEFAULT_DUE_AMT = new BigDecimal(1);
-    private static final BigDecimal UPDATED_DUE_AMT = new BigDecimal(2);
+    private static final Double DEFAULT_DUE_AMT = 1D;
+    private static final Double UPDATED_DUE_AMT = 2D;
 
-    private static final BigDecimal DEFAULT_PAID_AMT = new BigDecimal(1);
-    private static final BigDecimal UPDATED_PAID_AMT = new BigDecimal(2);
+    private static final Double DEFAULT_PAID_AMT = 1D;
+    private static final Double UPDATED_PAID_AMT = 2D;
 
-    private static final BigDecimal DEFAULT_BAL_AMT = new BigDecimal(1);
-    private static final BigDecimal UPDATED_BAL_AMT = new BigDecimal(2);
+    private static final Double DEFAULT_BAL_AMT = 1D;
+    private static final Double UPDATED_BAL_AMT = 2D;
 
     private static final Long DEFAULT_RECIEPT_NUMBER = 1L;
     private static final Long UPDATED_RECIEPT_NUMBER = 2L;
@@ -278,9 +277,9 @@ public class ProgramResourceIT {
             .andExpect(jsonPath("$.[*].withLangar").value(hasItem(DEFAULT_WITH_LANGAR.booleanValue())))
             .andExpect(jsonPath("$.[*].langarMenu").value(hasItem(DEFAULT_LANGAR_MENU.toString())))
             .andExpect(jsonPath("$.[*].langarTime").value(hasItem(DEFAULT_LANGAR_TIME.toString())))
-            .andExpect(jsonPath("$.[*].dueAmt").value(hasItem(DEFAULT_DUE_AMT.intValue())))
-            .andExpect(jsonPath("$.[*].paidAmt").value(hasItem(DEFAULT_PAID_AMT.intValue())))
-            .andExpect(jsonPath("$.[*].balAmt").value(hasItem(DEFAULT_BAL_AMT.intValue())))
+            .andExpect(jsonPath("$.[*].dueAmt").value(hasItem(DEFAULT_DUE_AMT.doubleValue())))
+            .andExpect(jsonPath("$.[*].paidAmt").value(hasItem(DEFAULT_PAID_AMT.doubleValue())))
+            .andExpect(jsonPath("$.[*].balAmt").value(hasItem(DEFAULT_BAL_AMT.doubleValue())))
             .andExpect(jsonPath("$.[*].recieptNumber").value(hasItem(DEFAULT_RECIEPT_NUMBER.intValue())))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK)))
             .andExpect(jsonPath("$.[*].bookingDate").value(hasItem(DEFAULT_BOOKING_DATE.toString())))
@@ -311,9 +310,9 @@ public class ProgramResourceIT {
             .andExpect(jsonPath("$.withLangar").value(DEFAULT_WITH_LANGAR.booleanValue()))
             .andExpect(jsonPath("$.langarMenu").value(DEFAULT_LANGAR_MENU.toString()))
             .andExpect(jsonPath("$.langarTime").value(DEFAULT_LANGAR_TIME.toString()))
-            .andExpect(jsonPath("$.dueAmt").value(DEFAULT_DUE_AMT.intValue()))
-            .andExpect(jsonPath("$.paidAmt").value(DEFAULT_PAID_AMT.intValue()))
-            .andExpect(jsonPath("$.balAmt").value(DEFAULT_BAL_AMT.intValue()))
+            .andExpect(jsonPath("$.dueAmt").value(DEFAULT_DUE_AMT.doubleValue()))
+            .andExpect(jsonPath("$.paidAmt").value(DEFAULT_PAID_AMT.doubleValue()))
+            .andExpect(jsonPath("$.balAmt").value(DEFAULT_BAL_AMT.doubleValue()))
             .andExpect(jsonPath("$.recieptNumber").value(DEFAULT_RECIEPT_NUMBER.intValue()))
             .andExpect(jsonPath("$.remark").value(DEFAULT_REMARK))
             .andExpect(jsonPath("$.bookingDate").value(DEFAULT_BOOKING_DATE.toString()))
@@ -462,9 +461,9 @@ public class ProgramResourceIT {
             .andExpect(jsonPath("$.[*].withLangar").value(hasItem(DEFAULT_WITH_LANGAR.booleanValue())))
             .andExpect(jsonPath("$.[*].langarMenu").value(hasItem(DEFAULT_LANGAR_MENU.toString())))
             .andExpect(jsonPath("$.[*].langarTime").value(hasItem(DEFAULT_LANGAR_TIME.toString())))
-            .andExpect(jsonPath("$.[*].dueAmt").value(hasItem(DEFAULT_DUE_AMT.intValue())))
-            .andExpect(jsonPath("$.[*].paidAmt").value(hasItem(DEFAULT_PAID_AMT.intValue())))
-            .andExpect(jsonPath("$.[*].balAmt").value(hasItem(DEFAULT_BAL_AMT.intValue())))
+            .andExpect(jsonPath("$.[*].dueAmt").value(hasItem(DEFAULT_DUE_AMT.doubleValue())))
+            .andExpect(jsonPath("$.[*].paidAmt").value(hasItem(DEFAULT_PAID_AMT.doubleValue())))
+            .andExpect(jsonPath("$.[*].balAmt").value(hasItem(DEFAULT_BAL_AMT.doubleValue())))
             .andExpect(jsonPath("$.[*].recieptNumber").value(hasItem(DEFAULT_RECIEPT_NUMBER.intValue())))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK)))
             .andExpect(jsonPath("$.[*].bookingDate").value(hasItem(DEFAULT_BOOKING_DATE.toString())))
