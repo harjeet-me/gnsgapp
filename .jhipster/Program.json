@@ -42,15 +42,15 @@
     },
     {
       "fieldName": "dueAmt",
-      "fieldType": "BigDecimal"
+      "fieldType": "Double"
     },
     {
       "fieldName": "paidAmt",
-      "fieldType": "BigDecimal"
+      "fieldType": "Double"
     },
     {
       "fieldName": "balAmt",
-      "fieldType": "BigDecimal"
+      "fieldType": "Double"
     },
     {
       "fieldName": "recieptNumber",
